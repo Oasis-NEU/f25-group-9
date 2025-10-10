@@ -1,10 +1,12 @@
+import './ProfilePage.css';
+
 
 function ProfilePage() {
 
     return (
-        <>
-            <p>Hello Profile</p>
-        </>
+        <div>
+            <header>Profile Page</header>
+        </div>
     )
 }
 
