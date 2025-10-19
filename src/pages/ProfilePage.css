@@ -1,0 +1,29 @@
+h1 {
+    font-family:'Times New Roman', Times, serif;
+    color: #000;
+}
+
+body{
+   background-color: #af9dc4;
+   font-family: 'Times New Roman', Times, serif;
+   color: #000;
+}
+
+button {
+    background-color: #a09fcd;
+    border: solid;
+    font-family:'Times New Roman', Times, serif;
+    cursor: pointer;
+}
+
+a {
+    color: #000;
+    text-decoration: none;
+}
+
+.circle {
+    border-radius: 50%;
+    background-color: #d4a6b0;
+    height: 300px;
+    width: 300px
+}
