@@ -1,0 +1,136 @@
+:root{
+    --bg: #a0b1d0;
+    --card: #caa2be;
+    --text: #ffffff;
+    --muted: #6a7a8f;
+    --line: #232833;
+    --primary: #a09fcd;
+    --focus: 0 0 0 3px #af9dc4;
+    --radius: 12px;
+    --space: 16px;
+}
+
+html,body{
+    background:var(--bg);
+    color:var(--text);
+    font-family: "DM Sans", system-ui, -apple-system, dm sans;
+    line-height:1.5;
+}
+
+::placeholder{
+    font-family: "DM Sans", system-ui, -apple-system, dm sans;
+    color:color-mix(in srgb, var(--text) 60%, transparent)
+}
+
+.create-post{
+    max-width: 760px;
+    margin: 48px auto;
+    padding: 28px;
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: 0 8px 30px rgba(14, 15, 26, 0.25);
+}
+
+.create-post > h1{
+    font-size: 35px;
+    font-weight: 800;
+    letter-spacing: .6px;
+    margin: 0 0 18px;
+}
+
+/* Form Layout */
+.form-row{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    margin-bottom: var(--space);
+}
+
+label{
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="file"],
+textarea{
+    border:1px solid var(--line);
+    background: color-mix(in srgb, var(--card) 75%, white);
+    color: var(--text);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 14px;
+}
+
+textarea{
+    min-height: 160px;
+    resize: vertical;
+}
+
+/* Focus */
+input:focus, textarea:focus{
+    outline: none;
+    box-shadow: var(--focus);
+}
+
+/* File input */
+input[type="file"]{
+    padding: 10px;
+    cursor: pointer;
+}
+
+/* Image Preview */
+.image-preview{
+    margin-top:10px;
+    max-height: 400px;
+    width:auto;
+    display:block;
+    object-fit: cover;
+    border-radius: 10px;
+    border:1px solid var(--line);
+}
+
+/* Radio Group */
+.radio-group{
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
+}
+
+.radio-group label{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:10px 12px;
+    border:1px solid var(--line);
+    border-radius: 999px;
+    cursor:pointer;
+    color: var(--text);
+    background: rgba(255,255,255,0.02);
+}
+
+.radio-group input[type="radio"]{
+    accent-color: var(--primary);
+}
+
+/* Button */
+.button{
+    background-color:color-mix(in srgb, var(--card) 70%, white);
+    gap:8px;
+    padding: 12px 18px;
+    border-radius: 12px;
+    border:1px solid var(--line);
+    font-weight:700;
+    letter-spacing:.2px;
+    cursor:pointer;
+    box-shadow: 0 10px 24px rgba(79,124,255,.25);
+}
+
+.button:hover{ filter: brightness(1.05); }
+.button:active{ transform: translateY(1px); }
+.button:disabled{
+    opacity:.6;
+    cursor: not-allowed;
+    box-shadow:none;
+}
