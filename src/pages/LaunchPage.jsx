@@ -1,35 +1,16 @@
-
+import './LaunchPage.css';
 function LaunchPage() {
 
     return (
         <>
-            <p>Hello Launch</p>
+            <p>Home</p>
+        <div class="container">
+             <button> <a href="./ProfilePage"> Profile </a></button>
+             <h1>About</h1>
+        </div>
         </>
+        
     )
 }
 
 export default LaunchPage
-
-<DOCTTYPE html>
-    <html>
-        <head>
-            <title> Launchpage </title>
-            <style>
-                body{
-                    font-family: Dm sans; 
-                    background: a09fcd;
-                }
-
-            button{
-                padding: 10px, 20px;
-                color: #a09fcd;
-                border: none;
-                border-radius: 0px;
-            }
-            </style>
-
-        <body>
-            <button id="profile">Click me!</button>
-        </body>
-        </head>
-    </html>
