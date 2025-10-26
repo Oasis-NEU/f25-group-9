@@ -1,7 +1,13 @@
 import express from "express";
 import { createClient } from "@supabase/supabase-js";
+import dotenv from "dotenv";
+dotenv.config({ path: ".env.local" });
 
-const supabase = createClient(process.env.REACT_APP_SUPABASE_URL, process.env.REACT_APP_SUPABASE_KEY);
+
+
+const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
+const app = express();
+app.use(express.json());
 
 app.post("/users", async (req, res) => {
   const { name, email } = req.body;
