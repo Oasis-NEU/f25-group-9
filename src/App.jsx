@@ -5,6 +5,7 @@ import AnalysisPage from './pages/AnalysisPage';
 import PostPage from './pages/PostPage';
 import LaunchPage from './pages/LaunchPage';
 import HomePage from './pages/HomePage';
+import LoginPage from './pages/LoginPage';
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
           <Route path="/analysis" element={<AnalysisPage />} />
           <Route path="/launch" element={<LaunchPage />} />
           <Route path="/home" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
         </Routes>
       </Router>
     </>
