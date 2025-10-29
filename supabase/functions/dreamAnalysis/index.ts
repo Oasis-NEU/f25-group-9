@@ -17,15 +17,18 @@ serve(async (req) => {
   const response = await openai.chat.completions.create({
     model: "gpt-4o-mini",
     messages: [
-      { role: "system", content: "Sen profesyonel bir rüya analiz uzmanısın." },
-      { role: "user", content }
+      { role: "system", content: 
+        "You are a dream analysis assistant. Give a short psychological interpretation." },
+      { role: "user", content: `Dream description: ${content}` }
     ],
+     max_tokens: 300,
+    temperature: 0.7,
   });
 
   const analysis = response.choices[0].message.content;
 
   return new Response(
-    JSON.stringify(data),
+    JSON.stringify({dream_id, analysis}),
     { headers: { "Content-Type": "application/json" } },
   )
 })
