@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './PostPage.css'
+import './PostPage.css';
+import { supabase } from '../../supabase.js';
 
 function PostPage() {
 
@@ -10,8 +11,10 @@ function PostPage() {
     const [author, setAuthor] = useState('');
     const [body, setBody] = useState('');
     const [tag, setTags] = useState('');
-    const [isPublic, setIsPublic] = useState(true);
-    const [image, setImage] = useState('');
+    const [is_public, setis_public] = useState(true);
+    const [imageFile, setImageFile] = useState(null); // real file
+    const [imagePreview, setImagePreview] = useState(''); // for showing
+
 
     const validate = () => {
         if (!title.trim()) { alert('Title is required'); return false; }
@@ -21,25 +24,61 @@ function PostPage() {
     };
 
     const handleImageChange = (e) => {
-        const f = e.target.files?.[0];
-        if (image) URL.revokeObjectURL(image);
-        setImage(f ? URL.createObjectURL(f) : '');
+        const f = e.target.files?.[0] || null;
+        setImageFile(f);
+        setImagePreview(f ? URL.createObjectURL(f) : '');
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (!validate()) return;
+
+        let image_url = null;
+
+        if (imageFile) {
+
+            const ext = imageFile.name.split('.').pop() || 'png';
+            const fileName = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
+
+            const { data: uploadData, error: uploadError } = await supabase
+                .storage
+                .from('posts')
+                .upload(fileName, imageFile);
+
+            if (uploadError) {
+                console.error(uploadError);
+                alert('Image upload failed');
+                return;
+            }
+
+            const { data: publicUrlData } = supabase
+                .storage
+                .from('posts')
+                .getPublicUrl(uploadData.path);
+
+            image_url = publicUrlData.publicUrl;
+        }
 
         const post = {
             title,
             author,
             body,
             tags: tag.split(',').map(t => t.trim()).filter(Boolean),
-            isPublic,
-            imagePreviewUrl: image || null,
-            createdAt: new Date().toISOString(),
+            is_public,
+            image_url
         };
 
+        const { data, error } = await supabase
+            .from('posts')
+            .insert([post])
+            .select();
+
+        if (error) {
+            console.error('supabase insert error:', error);
+            alert('Failed to create post');
+            return;
+        }
+        
         console.log('Post created:', post);
 
         navigate('/profile');
@@ -78,12 +117,9 @@ function PostPage() {
                             id='post-image'
                             type='file'
                             accept='image/*'
-                            onChange={(e) => {
-                                const f = e.target.files?.[0];
-                                setImage(f ? URL.createObjectURL(f) : '');
-                            }}
+                            onChange={handleImageChange}
                         />
-                        {image && <img src={image} alt='Preview' className='image-preview' />}
+                        {imagePreview && <img src={imagePreview} alt='Preview' className='image-preview' />}
                     </div>
 
                     <div className='form-row'>
@@ -94,8 +130,8 @@ function PostPage() {
                                 type='radio'
                                 name='visibility'
                                 value='public'
-                                checked={isPublic === true}
-                                onChange={() => setIsPublic(true)}
+                                checked={is_public === true}
+                                onChange={() => setis_public(true)}
                                 />
                                 Public
                             </label>
@@ -104,8 +140,8 @@ function PostPage() {
                                 type='radio'
                                 name='visibility'
                                 value='private'
-                                checked={isPublic === false}
-                                onChange={() => setIsPublic(false)}
+                                checked={is_public === false}
+                                onChange={() => setis_public(false)}
                                 />
                                 Private
                             </label>
