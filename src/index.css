@@ -1,0 +1,11 @@
+:root{
+    --bg: #a0b1d0;
+    --card: #caa2be;
+    --text: #ffffff;
+    --muted: #6a7a8f;
+    --line: #232833;
+    --primary: #a09fcd;
+    --focus: 0 0 0 3px #af9dc4;
+    --radius: 12px;
+    --space: 16px;
+}

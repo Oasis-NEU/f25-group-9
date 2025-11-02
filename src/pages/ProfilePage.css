@@ -1,0 +1,153 @@
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "DM Sans", system-ui, -apple-system, dm sans;
+  line-height: 1.5;
+  text-align: center;
+  margin: 0;
+  background: linear-gradient(135deg, #d6bcfa, #b794f4, #fbb6ce);
+  background-size: 300% 300%;
+  animation: gradientShift 12s ease infinite;
+  color: #fff;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/*for top header POSSIBLY COULD MAKE UNIVERSAL*/
+.header {
+  background: #caa2be;
+  backdrop-filter: blur(10px);
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  font-family: "DM Sans", system-ui, -apple-system, dm sans;
+}
+
+.header nav button {
+  margin: 0 10px;
+  background: transparent;
+  border: none;
+  font-size: 1.1rem;
+}
+
+.header nav a {
+  color: white;
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 10px;
+}
+
+.header nav a:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/*makes post button fun*/
+.post-btn {
+  background-color: #caa2be;
+  border: none;
+  border-radius: 25px;
+  padding: 12px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+.post-btn a {
+  text-decoration: none;
+  color: white;
+}
+.post-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px white;
+}
+
+.profile-pic {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  object-fit: cover;
+}
+
+/* puts pfp and bio in cute container*/
+.profile-container {
+  margin-top: 60px;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 25px;
+  backdrop-filter: blur(15px);
+  display: inline-block;
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+  animation: float 6s ease-in-out infinite;
+}
+
+.bio {
+  font-size: 1.1rem;
+  color: #fdf6f0;
+  margin-bottom: 25px;
+  font-style: italic;
+}
+
+/* for scroll through of dreams*/
+.dream-scroll {
+  display: flex;
+  flex-direction: column;
+  margin-top: 60px;
+  text-align: center;
+  padding-bottom: 80px;
+}
+
+.dream-title {
+  color: #fff;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+}
+/*Container*/
+.dream-list {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  padding: 20px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.5) transparent;
+}
+
+.scroll-container {
+  background: #caa2be;
+  border: 3px double #caa2be;
+  border-radius: 25px;
+  max-height: 200px;
+  overflow-y: auto;
+  width: 300px;
+  padding: 15px;
+  box-shadow: inset 0 0 10px rgba(255, 182, 193, 0.3);
+  scrollbar-width: thin;
+  scrollbar-color: #caa2be;
+  margin: 0 auto;
+}
+
+.dream-item {
+  background: #caa2be;
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  color: white;
+  transition: transform 0.2s ease;
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+}
+
+.dream-item:hover {
+  transform: scale(1.03);
+  background: rgba(255, 255, 255, 0.5);
+}
