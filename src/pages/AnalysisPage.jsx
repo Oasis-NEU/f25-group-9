@@ -1,5 +1,5 @@
 import { useState,useEffect } from "react";
-import { supabase } from "../supabase.js";
+import { supabase } from "../../supabase.js";
 import "./AnalysisPage.css";
 
 
@@ -42,8 +42,6 @@ function AnalysisPage() {
             setAnalysisText("");
             setIsAnalyzing(true);
 
-        };
-
         try {
             const { data, error } = await supabase.functions.invoke("dreamAnalysis", {
             body: { dream_id: dream.id, content: dream.title },
@@ -57,6 +55,7 @@ function AnalysisPage() {
                 dream_id: dream.id,
                 analysis: data.analysis,
                 });
+
             } catch (err) {
                 console.error("Error:", err);
                 setAnalysisText("Something went wrong while analyzing your dream.");
