@@ -1,42 +1,45 @@
-   
-button{
-                padding: 10px, 20px;
-                background-color: #a09fcd;
-                border: none;
-                border-radius: 5px;
-                .container img {
-                    width: 100%;
-                 height: auto;
-                }           
-            .container .btn:hover {
-            background-color: #a09fcd;
-            }   
-}
-
-.hometab{
-    width: 990px;
-    height: 30px;
-    box-sizing: border-box; 
-    background: var(--muted);
-    border-radius: var(--radius);
-    margin: auto;
-    text-align: center;
-    button-align: left;
-}
-
-.quote{
-    text-align: center; 
-}
-
-
-
-.about{
-    text-align: center;
-}
-
-.background{
+button {
+  padding: 10px, 20px;
+  background-color: #a09fcd;
+  border: none;
+  border-radius: 5px;
+  margin: 2px;
+  .container img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+  }
+  .container .btn:hover {
+    background-color: #a09fcd;
+  }
 }
 
+.hometab {
+  width: 990px;
+  height: 30px;
+  box-sizing: border-box;
+  background: var(--muted);
+  border-radius: var(--radius);
+  margin-top: 10px;
+  margin-left: 260px;
+  text-align: left;
+  padding-top: 2px;
+  padding-left: 20px;
+}
+
+.quote {
+  text-align: center;
+}
+
+.about {
+  text-align: center;
+}
+
+.background {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dslabel {
+  margin: 300px;
+}
