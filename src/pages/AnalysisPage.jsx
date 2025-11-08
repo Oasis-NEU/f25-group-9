@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState,useEffect, useRef} from "react";
 import { supabase } from "../../supabase.js";
 import "./AnalysisPage.css";
 
@@ -8,6 +8,8 @@ function AnalysisPage() {
         const [selectedDream, setSelectedDream] = useState(null);
         const [analysisText, setAnalysisText] = useState("");
         const [isAnalyzing, setIsAnalyzing] = useState(false);
+
+        const analysisRef = useRef(null);
 
         const pageStyle = {
             backgroundImage: "url('/background4.jpg')", 
@@ -36,33 +38,56 @@ function AnalysisPage() {
         fetchDreams();
     }, []);
 
+    useEffect(() => {
+    if (analysisText && analysisRef.current) {
+      analysisRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+        });
+      }
+    }, [analysisText]);
 
-        const DreamClick = async(dream) => {
-            setSelectedDream(dream);
-            setAnalysisText("");
-            setIsAnalyzing(true);
+    useEffect(() => {
+      if (isAnalyzing && analysisRef.current) {
+        analysisRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }
+    }, [isAnalyzing]);
 
-        try {
-            const { data, error } = await supabase.functions.invoke("dreamAnalysis", {
-            body: { dream_id: dream.id, content: dream.title },
-            });
 
-            if (error) throw error;
+    const DreamClick = async (dream) => {
+      setSelectedDream(dream);
+      setAnalysisText("");
+      setIsAnalyzing(true);
 
-            setAnalysisText(data.analysis);
+      try {
+        const { data, error } = await supabase.functions.invoke(
+          "dreamAnalysis",
+          {
+            body: {
+              dream_id: dream.id,
+              content: dream.title, 
+            },
+          }
+        );
 
-            await supabase.from("dream_analysis").insert({
-                dream_id: dream.id,
-                analysis: data.analysis,
-                });
+        if (error) throw error;
 
-            } catch (err) {
-                console.error("Error:", err);
-                setAnalysisText("Something went wrong while analyzing your dream.");
-            }
+        setAnalysisText(data.analysis);
+        await supabase.from("dream_analysis").insert({
+          dream_id: dream.id,
+          analysis: data.analysis,
+        });
+      } catch (err) {
+        console.error("Error:", err);
+        setAnalysisText("Something went wrong while analyzing your dream.");
+      }
 
-            setIsAnalyzing(false);
-            };            
+      setIsAnalyzing(false);
+    };
+          
 
 
     return (
@@ -99,6 +124,7 @@ function AnalysisPage() {
             <p style={{ color: "#fff" }}>No dreams found.</p>
           )}
         </div>
+        <div ref={analysisRef}></div>
 
         {isAnalyzing && (
           <p style={{ color: "#fff", fontSize: "24px" }}>
@@ -108,20 +134,36 @@ function AnalysisPage() {
 
         {analysisText && (
           <div
+            ref={analysisRef}
             style={{
-              background: "rgba(255,255,255,0.1)",
-              color: "#fff",
-              borderRadius: "20px",
-              padding: "20px",
-              marginTop: "30px",
-              maxWidth: "600px",
-              backdropFilter: "blur(10px)",
+              background: "rgba(146, 205, 231, 0.87)",
+              color: "#ffffff",
+              borderRadius: "25px",
+              padding: "40px",
+              marginTop: "50px",
+              maxWidth: "700px",
+              marginLeft: "auto",
+              marginRight: "auto",
+              textAlign: "center",
+              lineHeight: "1.8",
+              fontSize: "20px",
+              backdropFilter: "blur(12px)",
+              boxShadow: "0 8px 25px rgba(0,0,0,0.35)"
             }}
           >
-            <h2>Dream Analysis</h2>
-            <p>{analysisText}</p>
+            <h2 style={{
+              fontSize: "32px",
+              marginBottom: "20px",
+              fontWeight: "bold",
+              color: "#f7d7e2"
+            }}>
+              Dream Analysis
+            </h2>
+
+            <p style={{ whiteSpace: "pre-line" }}>{analysisText}</p>
           </div>
         )}
+
       </div>
     </>
   );
