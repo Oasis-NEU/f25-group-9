@@ -17,7 +17,6 @@ function PostPage() {
 
     const validate = () => {
         if (!title.trim()) { alert('Title is required'); return false; }
-        if (!author.trim()) { alert('Author is required'); return false; }
         if (!body.trim()) { alert('Body is required'); return false; }
         return true;
     };
