@@ -49,7 +49,7 @@ function App() {
           <Route path="/launch" element={session ? <LaunchPage /> : <Navigate to="/login" replace />} />
           <Route path="/home" element={session ? <HomePage /> : <Navigate to="/login" replace />} />
           <Route path="/login" element={<LoginPage/>} />
-          <Route path="/createaccount" element={session ? <CreateAccountPage /> : <Navigate to="/login" replace />} />
+          <Route path="/createaccount" element={<CreateAccountPage />} />
         </Routes>
       </Router>
     </>
