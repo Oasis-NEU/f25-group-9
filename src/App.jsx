@@ -13,6 +13,7 @@ import React, { useState, useEffect } from 'react';
 function App() {
 
   const [session, setSession] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -30,6 +31,9 @@ function App() {
     return () => subscription.unsubscribe();
   }, []);
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
@@ -39,13 +43,13 @@ function App() {
             path="*" 
             element={session ? <Navigate to="/profile" replace /> : <Navigate to="/login" replace />} 
           />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/post" element={<PostPage />} />
-          <Route path="/analysis" element={<AnalysisPage />} />
-          <Route path="/launch" element={<LaunchPage />} />
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/Createaccount" element={<CreateAccountPage/>} />
+          <Route path="/profile" element={session ? <ProfilePage /> : <Navigate to="/login" replace />} />
+          <Route path="/post" element={session ? <PostPage /> : <Navigate to="/login" replace />} />
+          <Route path="/analysis" element={session ? <AnalysisPage /> : <Navigate to="/login" replace />} />
+          <Route path="/launch" element={session ? <LaunchPage /> : <Navigate to="/login" replace />} />
+          <Route path="/home" element={session ? <HomePage /> : <Navigate to="/login" replace />} />
+          <Route path="/login" element={<LoginPage/>} />
+          <Route path="/createaccount" element={session ? <CreateAccountPage /> : <Navigate to="/login" replace />} />
         </Routes>
       </Router>
     </>
