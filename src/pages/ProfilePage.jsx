@@ -20,7 +20,7 @@ function ProfilePage() {
       } = await supabase.auth.getUser();
 
       if (user) {
-        setDisplayName(user.user_metadata.email || "Dreamer");
+        setDisplayName(user.user_metadata.email);
       }
       if (error) {
         console.log(error);
