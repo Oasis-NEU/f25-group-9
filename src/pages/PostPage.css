@@ -1,8 +1,15 @@
 html,body{
-    background:var(--bg);
+    background-image: url('background4.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    padding: 0px;
     color:var(--text);
     font-family: "DM Sans", system-ui, -apple-system, dm sans;
     line-height:1.5;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 ::placeholder{
