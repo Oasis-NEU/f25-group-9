@@ -1,6 +1,7 @@
 import "./ProfilePage.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import { supabase } from "../../supabase.js";
+
 function ProfilePage() {
   const dreamsTests = [
     "This is one of my dreams",
@@ -10,22 +11,60 @@ function ProfilePage() {
 
   const [fetchError, setFetchError] = useState(null);
   const [dreams, setDreams] = useState(null);
+  const [displayName, setDisplayName] = useState(null);
+
+  useEffect(() => {
+    const loadUserName = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (user) {
+        setDisplayName(user.user_metadata.email || "Dreamer");
+      }
+      if (error) {
+        console.log(error);
+        setFetchError("Dreamer");
+      }
+    };
+
+    loadUserName();
+  }, []);
 
   useEffect(() => {
     const fetchDreams = async () => {
-      const { data, error } = await supabase.from("posts").select();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (!user) return;
+
+      const { data, error } = await supabase
+        .from("posts")
+        .select("*")
+        .eq("user_id", user.id);
+
       if (error) {
-        setFetchError("Could not fetch dreams");
-        setDreams(null);
         console.log(error);
-      }
-      if (data) {
-        setDreams(data);
+        setFetchError("Could not load dreams");
+      } else {
         setFetchError(null);
+        setDreams(data);
       }
     };
+
     fetchDreams();
   }, []);
+
+  const handleLogout = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      console.log("Error signing out:", error.message);
+    } else {
+      // Redirect the user after logout, e.g., to login page
+      window.location.href = "/launch"; // or wherever your login page is
+    }
+  };
 
   return (
     <>
@@ -39,9 +78,8 @@ function ProfilePage() {
             {" "}
             <a href="./home"> DreamScape</a>
           </button>
-          <button>
-            {" "}
-            <a href="./launch"> Logout</a>
+          <button onClick={handleLogout}>
+            <a>Logout</a>
           </button>
         </nav>
       </div>
@@ -53,10 +91,14 @@ function ProfilePage() {
           className="profile-pic"
         />
 
-        <h1> Welcome to your DreamScape⭐️</h1>
+        <h1> Welcome to your DreamScape, {displayName} </h1>
         <p className="bio">Below here lies your subconscious</p>
         <button className="post-btn">
           <a href="./Post">Make a Post</a>
+        </button>
+        <p></p>
+        <button className="post-btn">
+          <a href="./Analysis">Analyze a Previous Dream</a>
         </button>
       </div>
       <div className="dream-scroll">
