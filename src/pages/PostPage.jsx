@@ -8,7 +8,6 @@ function PostPage() {
     const navigate = useNavigate();
 
     const [title, setTitle] = useState('');
-    const [author, setAuthor] = useState('');
     const [body, setBody] = useState('');
     const [tag, setTags] = useState('');
     const [is_public, setis_public] = useState(true);
@@ -34,6 +33,8 @@ function PostPage() {
         if (!validate()) return;
 
         let image_url = null;
+
+        const { data: { user }, error: userError } = await supabase.auth.getUser();
 
         if (imageFile) {
 
@@ -61,7 +62,7 @@ function PostPage() {
 
         const post = {
             title,
-            author,
+            user_id: user.id,
             body,
             tags: tag.split(',').map(t => t.trim()).filter(Boolean),
             is_public,
@@ -94,11 +95,6 @@ function PostPage() {
                     <div className='form-row'>
                         <label>Title</label>
                         <input id='post-title' type='text' value={title} onChange={(e) => setTitle(e.target.value)}/>
-                    </div>
-
-                    <div className='form-row'>
-                        <label>Author</label>
-                        <input id='post-author' type='text' value={author} onChange={(e) => setAuthor(e.target.value)}/>
                     </div>
 
                     <div className='form-row'>
