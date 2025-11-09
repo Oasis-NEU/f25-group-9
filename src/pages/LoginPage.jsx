@@ -29,7 +29,7 @@ function LoginPage() {
 
   return (
     <div className="background">    
-      <div className="log">
+      <div className="log-container">
         <h2>Login</h2>
 
       <form onSubmit={handleLogin}>
@@ -57,14 +57,14 @@ function LoginPage() {
 
         {error && <p className="error">{error}</p>}
 
-        <button className="Login" type="Login">
+        <button className="buttonStyle" type="Login">
           {loading} {loading ? "Logging in..." : "Login"}{" "}
         </button>
 
        <br></br>
 
         <Link to="/createaccount">
-          <button className="Account" type="Account">
+          <button className="buttonStyle">
             Create an Account {loading}
           </button>
         </Link>
