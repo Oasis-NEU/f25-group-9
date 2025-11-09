@@ -1,10 +1,31 @@
 import "./ProfilePage.css";
+import { useState, useEffect } from "react";
+import { supabase } from "../../supabase.js";
 function ProfilePage() {
-  const dreams = [
+  const dreamsTests = [
     "This is one of my dreams",
     "This is another one of my dreams",
     "Link this to the database",
   ];
+
+  const [fetchError, setFetchError] = useState(null);
+  const [dreams, setDreams] = useState(null);
+
+  useEffect(() => {
+    const fetchDreams = async () => {
+      const { data, error } = await supabase.from("posts").select();
+      if (error) {
+        setFetchError("Could not fetch dreams");
+        setDreams(null);
+        console.log(error);
+      }
+      if (data) {
+        setDreams(data);
+        setFetchError(null);
+      }
+    };
+    fetchDreams();
+  }, []);
 
   return (
     <>
@@ -12,15 +33,15 @@ function ProfilePage() {
         <nav>
           <button>
             {" "}
-            <a href="./HomePage"> Feed</a>
+            <a href="./home"> Feed</a>
           </button>
           <button>
             {" "}
-            <a href="./HomePage"> DreamScape</a>
+            <a href="./home"> DreamScape</a>
           </button>
           <button>
             {" "}
-            <a href="./LaunchPage"> Logout</a>
+            <a href="./launch"> Logout</a>
           </button>
         </nav>
       </div>
@@ -41,11 +62,19 @@ function ProfilePage() {
       <div className="dream-scroll">
         <h3 className="dream-title"> Logged Dreams </h3>
         <div className="scroll-container">
-          {dreams.map((dream, index) => (
-            <div key={index} className="dream-item">
-              {dream}
-            </div>
-          ))}
+          {fetchError && <p>{fetchError}</p>}
+          {dreams &&
+            dreams.map((dream) => (
+              <p class="dream-item">
+                {dream.title}
+                <p class="dream-body">{dream.body}</p>
+                <img
+                  src={dream.image_url}
+                  alt="Profile Picture"
+                  className="post-image"
+                />
+              </p>
+            ))}
         </div>
       </div>
     </>
