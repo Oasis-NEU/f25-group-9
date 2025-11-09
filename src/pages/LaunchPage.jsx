@@ -4,24 +4,30 @@ function LaunchPage() {
     return (
         <>
         <div class ="hometab">
-            <button>Home</button>
+            <div>
+            <button>
+            <a href="./launch"> Home</a>
+            </button>
             <button>About</button>
-            <label>Dreamscape</label>
+            <label class = "dslabel">Dreamscape</label>
         </div>
-      
-        <div> 
-            <img src= "icon.png"/>
+            
         </div>
 
-        <div class ="loginbutton">
-            <button>
-            <a href="./login"> Login</a>
-            </button>
-        </div>
         
         <div class ="quote">
              <h2>Imagination is the beginning of creation </h2>
              <h3>Start dreaming today</h3>
+        </div>
+
+        <div> 
+            <img src= "icon.png"/>
+        </div>
+
+     <div class ="loginbutton">
+            <button>
+            <a href="./login"> Login</a>
+            </button>
         </div>
 
         <div class="about">

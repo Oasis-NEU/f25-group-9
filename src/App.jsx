@@ -6,6 +6,7 @@ import PostPage from './pages/PostPage';
 import LaunchPage from './pages/LaunchPage';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
+import CreateAccountPage from './pages/CreateAccountPage';
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
           <Route path="/launch" element={<LaunchPage />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/Createaccount" element={<CreateAccountPage/>} />
         </Routes>
       </Router>
     </>
