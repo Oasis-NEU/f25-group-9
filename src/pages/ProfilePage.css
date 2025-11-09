@@ -1,26 +1,15 @@
 body {
-  background: var(--bg);
-  color: var(--text);
+  background-image: url("background4.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  padding: 0px;
   font-family: "DM Sans", system-ui, -apple-system, dm sans;
   line-height: 1.5;
   text-align: center;
   margin: 0;
-  background: linear-gradient(135deg, #d6bcfa, #b794f4, #fbb6ce);
-  background-size: 300% 300%;
-  animation: gradientShift 12s ease infinite;
   color: #fff;
-}
-
-@keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
 }
 
 /*for top header POSSIBLY COULD MAKE UNIVERSAL*/
