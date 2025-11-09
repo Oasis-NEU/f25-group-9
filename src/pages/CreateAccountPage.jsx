@@ -24,7 +24,7 @@ function CreateAccountPage() {
     } else {
       setSuccess(true);
       setTimeout(() => {
-        navigate('/profile');
+        navigate('/login');
       }, 2000);
     }
 
@@ -36,6 +36,14 @@ function CreateAccountPage() {
         <div className="CreateanAccount">
       <h2>Create an Account</h2>
 
+        <label>Name:</label>
+          <input
+          className="inputbox"
+          type="name"
+          onChange={(e) => setName(e.target.value)}
+          required
+          />
+
       <form onSubmit={handleSubmit}>
         <label>Email:</label>
         <input
@@ -46,7 +54,7 @@ function CreateAccountPage() {
           required
         />
         <div></div>
-        
+
                 <label>Password:</label>
                 <input
                   className="inputbox"
@@ -60,12 +68,12 @@ function CreateAccountPage() {
                 <br></br>
         
                 {error && <p className="error">{error}</p>}
-                <button className="Create" type="submit">
+                <button className="buttonStyle" type="submit">
                   {" "}
                   {loading ? "Creating Account..." : "Create Account"}
                 </button>
 
-                {success && <p className="success">You created an account! Redirecting...</p>}
+                {success && <p className="success">You created an account! Verify email to login</p>}
               </form>
             </div>
           </div>

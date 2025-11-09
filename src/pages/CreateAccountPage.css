@@ -14,12 +14,14 @@
 }
 
 .CreateanAccount {
-  width: 350px;
-  min-height: 500px;
-  background-image: url('../assets/loginbubble.png'); /* cloud image */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+   margin-top: 60px;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 25px;
+  backdrop-filter: blur(15px);
+  display: inline-block;
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+  animation: float 6s ease-in-out infinite;
            
 }
 
@@ -33,4 +35,9 @@
   display:flex;  
   justify-content:center;
   align-items: center;
+}
+
+.buttonStyle {
+  font-family: "DM Sans", system-ui, -apple-system, dm sans;
+  color: white;
 }
