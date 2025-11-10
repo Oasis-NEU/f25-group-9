@@ -13,6 +13,7 @@ function PostPage() {
     const [is_public, setis_public] = useState(true);
     const [imageFile, setImageFile] = useState(null); // real file
     const [imagePreview, setImagePreview] = useState(''); // for showing
+    const [isPosting, setIsPosting] = useState(false);
 
 
     const validate = () => {
@@ -28,6 +29,7 @@ function PostPage() {
     };
 
     const handleSubmit = async (e) => {
+        setIsPosting(true)
         e.preventDefault();
         if (!validate()) return;
 
@@ -46,6 +48,7 @@ function PostPage() {
                 .upload(fileName, imageFile);
 
             if (uploadError) {
+                setIsPosting(false);
                 console.error(uploadError);
                 alert('Image upload failed');
                 return;
@@ -74,6 +77,7 @@ function PostPage() {
             .select();
 
         if (error) {
+            setIsPosting(false);
             console.error('supabase insert error:', error);
             alert('Failed to create post');
             return;
@@ -85,74 +89,82 @@ function PostPage() {
     };
 
     return (
+        <>
         <div className="post-page-container">
-            <button className='back-button' onClick={() => navigate('/profile')}>
-                Back to Profile
-            </button>
+            {isPosting ? (
+                <div className="posting-overlay">
+                    <h1>Posting<span className="dots"></span></h1>
+                </div>
+            ) : (
+                <>
+                    <button className='back-button' onClick={() => navigate('/profile')}>
+                        Back to Profile
+                    </button>
 
-            <div className = 'create-post'>
-                <h1>My dream...</h1>
+                    <div className = 'create-post'>
+                        <h1>My dream...</h1>
 
-               <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit}>
 
-                    <div className='form-row'>
-                        <label>Title</label>
-                        <input id='post-title' type='text' value={title} onChange={(e) => setTitle(e.target.value)}/>
-                    </div>
+                            <div className='form-row'>
+                                <label>Title</label>
+                                <input id='post-title' type='text' value={title} onChange={(e) => setTitle(e.target.value)}/>
+                            </div>
 
-                    <div className='form-row'>
-                        <label>Summary</label>
-                        <textarea id='post-body' rows={10} value={body} onChange={(e) => setBody(e.target.value)} placeholder='e.g., It started with baby bell cheese...'/>
-                    </div>
+                            <div className='form-row'>
+                                <label>Summary</label>
+                                <textarea id='post-body' rows={10} value={body} onChange={(e) => setBody(e.target.value)} placeholder='e.g., It started with baby bell cheese...'/>
+                            </div>
 
-                    <div className='form-row'>
-                        <label>Tags</label>
-                        <input id='post-tags' type='text' value={tag} onChange={(e) => setTags(e.target.value)} placeholder='seperate with ,'/>
-                    </div>
+                            <div className='form-row'>
+                                <label>Tags</label>
+                                <input id='post-tags' type='text' value={tag} onChange={(e) => setTags(e.target.value)} placeholder='seperate with ,'/>
+                            </div>
 
-                    <div className='form-row'>
-                        <label>Image</label>
-                        <input
-                            id='post-image'
-                            type='file'
-                            accept='image/*'
-                            onChange={handleImageChange}
-                        />
-                        {imagePreview && <img src={imagePreview} alt='Preview' className='image-preview' />}
-                    </div>
-
-                    <div className='form-row'>
-                        <label>Visibility</label>
-                        <div className='radio-group'>
-                            <label>
+                            <div className='form-row'>
+                                <label>Image</label>
                                 <input
-                                type='radio'
-                                name='visibility'
-                                value='public'
-                                checked={is_public === true}
-                                onChange={() => setis_public(true)}
+                                    id='post-image'
+                                    type='file'
+                                    accept='image/*'
+                                    onChange={handleImageChange}
                                 />
-                                Public
-                            </label>
-                            <label>
-                                <input
-                                type='radio'
-                                name='visibility'
-                                value='private'
-                                checked={is_public === false}
-                                onChange={() => setis_public(false)}
-                                />
-                                Private
-                            </label>
-                        </div>
-                    </div>
+                                {imagePreview && <img src={imagePreview} alt='Preview' className='image-preview' />}
+                            </div>
 
-                    <div className='form-row'>
-                        <button className='button' type='submit'>Post</button>
-                    </div>
+                            <div className='form-row'>
+                                <label>Visibility</label>
+                                <div className='radio-group'>
+                                    <label>
+                                        <input
+                                        type='radio'
+                                        name='visibility'
+                                        value='public'
+                                        checked={is_public === true}
+                                        onChange={() => setis_public(true)}
+                                        />
+                                        Public
+                                    </label>
+                                    <label>
+                                        <input
+                                        type='radio'
+                                        name='visibility'
+                                        value='private'
+                                        checked={is_public === false}
+                                        onChange={() => setis_public(false)}
+                                        />
+                                        Private
+                                    </label>
+                                </div>
+                            </div>
 
-                </form>
-            </div>
+                            <div className='form-row'>
+                                <button className='button' type='submit'>Post</button>
+                            </div>
+
+                        </form>
+                    </div> 
+                </>)}
 
             <div id="background-wrap">
                 <div className="x1">
@@ -176,6 +188,7 @@ function PostPage() {
                 </div>
             </div>
         </div>
+        </>
     )
 }
 
