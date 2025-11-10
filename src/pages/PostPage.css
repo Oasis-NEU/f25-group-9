@@ -20,9 +20,13 @@ body{
 }
 
 @keyframes float {
-  0% { transform: translateY(0); }
+  0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
-  100% { transform: translateY(0); }
+}
+
+@keyframes animateCloud {
+    0% { margin-left: -1000px; }
+    100% { margin-left: 100%; }
 }
 
 .create-post{
@@ -34,7 +38,6 @@ body{
     backdrop-filter: blur(15px);
     border-radius: var(--radius);
     box-shadow: 0 8px 30px rgba(14, 15, 26, 0.25);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     animation: float 6s cubic-bezier(0.4, 0.0, 0.6, 1.0) infinite;
 }
 
@@ -43,25 +46,29 @@ body{
     font-weight: 800;
     letter-spacing: .6px;
     margin: 0 0 18px;
+    text-align: center;
 }
 
-/* Form Layout */
-.form-row{
-    display:flex;
-    flex-direction:column;
+.post-page-container .form-row{
+    display: flex;
+    flex-direction: column;
     gap:8px;
     margin-bottom: var(--space);
 }
 
-label{
-    font-size: 18px;
-    font-weight: 600;
+.post-page-container .form-row:nth-last-child(2) {
+    margin-bottom: calc(var(--space) * 2);
 }
 
-/* Inputs */
-input[type="text"],
-input[type="file"],
-textarea{
+.post-page-container label{
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.post-page-container input[type="text"],
+.post-page-container input[type="file"],
+.post-page-container textarea{
     border:1px solid var(--line);
     background: color-mix(in srgb, var(--card) 90%, white);
     font-family: "DM Sans", system-ui, -apple-system, dm sans;
@@ -71,24 +78,23 @@ textarea{
     font-size: 14px;
 }
 
-textarea{
+.post-page-container textarea{
     min-height: 160px;
     resize: vertical;
 }
 
-/* Focus */
-input:focus, textarea:focus{
+.post-page-container input:focus,
+.post-page-container textarea:focus{
     outline: none;
     box-shadow: var(--focus);
 }
 
-/* File input */
-input[type="file"]{
+.post-page-container input[type="file"]{
     padding: 10px;
     cursor: pointer;
 }
 
-input[type="file"]::file-selector-button{
+.post-page-container input[type="file"]::file-selector-button{
     background: color-mix(in srgb, var(--card) 50%, white);
     color: #1a1a1a;
     border: 1px solid var(--line);
@@ -100,12 +106,11 @@ input[type="file"]::file-selector-button{
     transition: filter 0.2s ease;
 }
 
-input[type="file"]::file-selector-button:hover{
+.post-page-container input[type="file"]::file-selector-button:hover{
     filter: brightness(0.95);
 }
 
-/* Image Preview */
-.image-preview{
+.post-page-container .image-preview{
     margin-top:10px;
     max-height: 400px;
     width:auto;
@@ -115,15 +120,14 @@ input[type="file"]::file-selector-button:hover{
     border:1px solid var(--line);
 }
 
-/* Radio Group */
-.radio-group{
+.post-page-container .radio-group{
     display:flex;
     gap:18px;
     flex-wrap:wrap;
     justify-content: center;
 }
 
-.radio-group label{
+.post-page-container .radio-group label{
     display:flex;
     align-items:center;
     gap:10px;
@@ -135,7 +139,7 @@ input[type="file"]::file-selector-button:hover{
     background: rgba(255,255,255,0.02);
 }
 
-.radio-group input[type="radio"]{
+.post-page-container .radio-group input[type="radio"]{
     appearance: none;
     width: 20px;
     height: 20px;
@@ -148,15 +152,14 @@ input[type="file"]::file-selector-button:hover{
     background: transparent;
 }
 
-.radio-group input[type="radio"]:checked::before{
+.post-page-container .radio-group input[type="radio"]:checked::before{
     content: '🌑';
     font-size: 20px;
     display: block;
     line-height: 1;
 }
 
-/* Button */
-.button{
+.post-page-container .button{
     background: color-mix(in srgb, var(--card) 90%, white);
     gap:8px;
     padding: 12px 18px;
@@ -168,19 +171,21 @@ input[type="file"]::file-selector-button:hover{
     cursor:pointer;
 }
 
-.form-row:nth-last-child(2) {
-    margin-bottom: calc(var(--space) * 2);
+.post-page-container .button:hover{ 
+    filter: brightness(1.05); 
 }
 
-.button:hover{ filter: brightness(1.05); }
-.button:active{ transform: translateY(1px); }
-.button:disabled{
+.post-page-container .button:active{ 
+    transform: translateY(1px); 
+}
+
+.post-page-container .button:disabled{
     opacity:.6;
     cursor: not-allowed;
     box-shadow:none;
 }
 
-.back-button {
+.post-page-container .back-button {
     position: fixed;
     color: var(--text);
     top: 20px;
@@ -194,153 +199,77 @@ input[type="file"]::file-selector-button:hover{
     cursor: pointer;
 }
 
-.back-button:hover {
+.post-page-container .back-button:hover {
     filter: brightness(1.05);
 }
 
-/* CLOUDS  ----------------------- */
+/* CLOUDS ----------- */
 
-#background-wrap {
+.post-page-container #background-wrap {
     bottom: 0;
-	left: 0;
-	padding-top: 50px;
-	position: fixed;
-	right: 0;
-	top: 0;
-	z-index: -1;
+    left: 0;
+    padding-top: 50px;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: -1;
 }
 
-/* KEYFRAMES */
-
-@-webkit-keyframes animateCloud {
-    0% {
-        margin-left: -1000px;
-    }
-    100% {
-        margin-left: 100%;
-    }
+.post-page-container .x1 {
+    animation: animateCloud 35s linear infinite;
+    transform: scale(0.65);
 }
 
-@-moz-keyframes animateCloud {
-    0% {
-        margin-left: -1000px;
-    }
-    100% {
-        margin-left: 100%;
-    }
+.post-page-container .x2 {
+    animation: animateCloud 20s linear infinite;
+    transform: scale(0.3);
 }
 
-@keyframes animateCloud {
-    0% {
-        margin-left: -1000px;
-    }
-    100% {
-        margin-left: 100%;
-    }
+.post-page-container .x3 {
+    animation: animateCloud 30s linear infinite;
+    transform: scale(0.5);
 }
 
-/* ANIMATIONS */
-
-.x1 {
-	-webkit-animation: animateCloud 35s linear infinite;
-	-moz-animation: animateCloud 35s linear infinite;
-	animation: animateCloud 35s linear infinite;
-	
-	-webkit-transform: scale(0.65);
-	-moz-transform: scale(0.65);
-	transform: scale(0.65);
+.post-page-container .x4 {
+    animation: animateCloud 18s linear infinite;
+    transform: scale(0.4);
 }
 
-.x2 {
-	-webkit-animation: animateCloud 20s linear infinite;
-	-moz-animation: animateCloud 20s linear infinite;
-	animation: animateCloud 20s linear infinite;
-	
-	-webkit-transform: scale(0.3);
-	-moz-transform: scale(0.3);
-	transform: scale(0.3);
+.post-page-container .x5 {
+    animation: animateCloud 25s linear infinite;
+    transform: scale(0.55);
 }
 
-.x3 {
-	-webkit-animation: animateCloud 30s linear infinite;
-	-moz-animation: animateCloud 30s linear infinite;
-	animation: animateCloud 30s linear infinite;
-	
-	-webkit-transform: scale(0.5);
-	-moz-transform: scale(0.5);
-	transform: scale(0.5);
-}
-
-.x4 {
-	-webkit-animation: animateCloud 18s linear infinite;
-	-moz-animation: animateCloud 18s linear infinite;
-	animation: animateCloud 18s linear infinite;
-	
-	-webkit-transform: scale(0.4);
-	-moz-transform: scale(0.4);
-	transform: scale(0.4);
-}
-
-.x5 {
-	-webkit-animation: animateCloud 25s linear infinite;
-	-moz-animation: animateCloud 25s linear infinite;
-	animation: animateCloud 25s linear infinite;
-	
-	-webkit-transform: scale(0.55);
-	-moz-transform: scale(0.55);
-	transform: scale(0.55);
-}
-
-/* OBJECTS */
-body {
-	height: 100vh;
-	margin: 0;
-	padding: 0;
-	overflow-x: hidden;
-}
-
-.cloud {
-	background: #fff;
-    opacity: 0.4;
-	
-	-webkit-border-radius: 100px;
-	-moz-border-radius: 100px;
-	border-radius: 100px;
-	
-	-webkit-box-shadow: 0 8px 5px rgba(0, 0, 0, 0.1);
-	-moz-box-shadow: 0 8px 5px rgba(0, 0, 0, 0.1);
-	box-shadow: 0 8px 5px rgba(0, 0, 0, 0.1);
-
-	height: 120px;
-	position: relative;
-	width: 350px;
-}
-
-.cloud:after, .cloud:before {
+.post-page-container .cloud {
     background: #fff;
-	content: '';
-	position: absolute;
-	z-index: -1;
+    opacity: 0.4;
+    border-radius: 100px;
+    box-shadow: 0 8px 5px rgba(0, 0, 0, 0.1);
+    height: 120px;
+    position: relative;
+    width: 350px;
 }
 
-.cloud:after {
-	-webkit-border-radius: 100px;
-	-moz-border-radius: 100px;
-	border-radius: 100px;
-
-	height: 120px;
-	left: 60px;
-	top: -60px;
-	width: 120px;
+.post-page-container .cloud:after, 
+.post-page-container .cloud:before {
+    background: #fff;
+    content: '';
+    position: absolute;
+    z-index: -1;
 }
 
-.cloud:before {
-	-webkit-border-radius: 200px;
-	-moz-border-radius: 200px;
-	border-radius: 200px;
+.post-page-container .cloud:after {
+    border-radius: 100px;
+    height: 120px;
+    left: 60px;
+    top: -60px;
+    width: 120px;
+}
 
-	width: 240px;
-	height: 240px;
-	right: 40px;
-	top: -100px;
+.post-page-container .cloud:before {
+    border-radius: 200px;
+    width: 240px;
+    height: 240px;
+    right: 40px;
+    top: -100px;
 }
