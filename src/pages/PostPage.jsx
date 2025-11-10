@@ -86,6 +86,10 @@ function PostPage() {
 
     return (
         <>
+            <button className='back-button' onClick={() => navigate('/profile')}>
+                Back to Profile
+            </button>
+
             <div className = 'create-post'>
                 <h1>My dream...</h1>
 
@@ -148,6 +152,28 @@ function PostPage() {
                     </div>
 
                 </form>
+            </div>
+
+            <div id="background-wrap">
+                <div class="x1">
+                    <div class="cloud"></div>
+                </div>
+
+                <div class="x2">
+                    <div class="cloud"></div>
+                </div>
+
+                <div class="x3">
+                    <div class="cloud"></div>
+                </div>
+
+                <div class="x4">
+                    <div class="cloud"></div>
+                </div>
+
+                <div class="x5">
+                    <div class="cloud"></div>
+                </div>
             </div>
         </>
     )
