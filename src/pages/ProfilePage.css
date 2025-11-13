@@ -1,8 +1,9 @@
 body {
-  background-image: url("background4.jpg");
+  background-image: url("/background4.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
   min-height: 100vh;
   padding: 0px;
   font-family: "DM Sans", system-ui, -apple-system, dm sans;
@@ -137,7 +138,7 @@ body {
   backdrop-filter: blur(10px);
   box-shadow: 0 8px 20px rgba(255, 255, 255, 0.25);
 
-  transition: transform 0.25s ease, background 0.25s ease;
+  transition: transform 0.25s ease;
 }
 
 .dream-item:hover {

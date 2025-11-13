@@ -20,11 +20,11 @@ function ProfilePage() {
       } = await supabase.auth.getUser();
 
       if (user) {
-        setDisplayName(user.user_metadata.email || "Dreamer");
+        setDisplayName(user.user_metadata.email);
       }
       if (error) {
         console.log(error);
-        setFetchError("Dreamer");
+        setFetchError();
       }
     };
 
@@ -86,7 +86,7 @@ function ProfilePage() {
 
       <div className="profile-container">
         <img
-          src="public/dreamscape__1_-removebg-preview.png"
+          src="/dreamscape__1_-removebg-preview.png"
           alt="Profile Picture"
           className="profile-pic"
         />
