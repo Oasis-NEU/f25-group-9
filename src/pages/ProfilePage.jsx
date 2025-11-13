@@ -17,14 +17,16 @@ function ProfilePage() {
     const loadUserName = async () => {
       const {
         data: { user },
+        error,
       } = await supabase.auth.getUser();
 
       if (user) {
         setDisplayName(user.user_metadata.email);
       }
+
       if (error) {
         console.log(error);
-        setFetchError();
+        setFetchError("Could not load user");
       }
     };
 
@@ -49,7 +51,7 @@ function ProfilePage() {
         setFetchError("Could not load dreams");
       } else {
         setFetchError(null);
-        setDreams(data);
+        setDreams(data.reverse());
       }
     };
 
@@ -68,7 +70,7 @@ function ProfilePage() {
 
   return (
     <>
-      <div class="header">
+      <div className="header">
         <nav>
           <button>
             {" "}
@@ -90,8 +92,9 @@ function ProfilePage() {
           alt="Profile Picture"
           className="profile-pic"
         />
-
-        <h1> Welcome to your DreamScape, {displayName} </h1>
+        <h1>
+          Welcome to your DreamScape, {displayName ? displayName : "Loading..."}
+        </h1>
         <p className="bio">Below here lies your subconscious</p>
         <button className="post-btn">
           <a href="./Post">Make a Post</a>
@@ -107,15 +110,15 @@ function ProfilePage() {
           {fetchError && <p>{fetchError}</p>}
           {dreams &&
             dreams.map((dream) => (
-              <p class="dream-item">
+              <div className="dream-item" key={dream.id}>
                 {dream.title}
-                <p class="dream-body">{dream.body}</p>
+                <p className="dream-body">{dream.body}</p>
                 <img
                   src={dream.image_url}
-                  alt="Profile Picture"
-                  className="post-image"
+                  alt="Dream"
+                  className="dream-item-img"
                 />
-              </p>
+              </div>
             ))}
         </div>
       </div>
