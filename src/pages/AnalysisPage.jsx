@@ -9,7 +9,7 @@ function AnalysisPage() {
     const analysisRef = useRef(null);         
 
     const pageStyle = {             
-        backgroundImage: "url('/background4.jpg')",              
+        backgroundImage: "url('/LoginBackground-2.jpg')",              
         backgroundSize: 'cover',             
         backgroundPosition: 'center',             
         backgroundRepeat: 'no-repeat',             
