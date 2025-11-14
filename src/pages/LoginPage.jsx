@@ -30,21 +30,31 @@ function LoginPage() {
   return (
     <div className="background">    
       <div className="log-container">
-        <h2>Login</h2>
-
+         <div className="loginlabel">
+        </div>
       <form onSubmit={handleLogin}>
-        <label>Email:</label>
+        <div className="loginlabel">
+          <label className = "login-label">⋆˖☽⋆˚⋆Login⋆˖☽⋆˚˖ </label>
+        </div>
+        <div className="emailinput">
+          <label className = "email-label">Email:</label>
+        </div>
+        
+        <div className="emailinput">
         <input
           className="inputbox"
           type="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-        />
+        />    
+        </div>
 
-        <br></br>
+        <div className="passwordinput">
+          <label className = "password-label">Password:</label>
+        </div>
 
-        <label>Password:</label>
+        <div className="passwordinput">
         <input
           className="inputbox"
           type="password"
@@ -53,12 +63,12 @@ function LoginPage() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-          <br></br>
+        </div>
 
         {error && <p className="error">{error}</p>}
 
         <button className="buttonStyle" type="Login">
-          {loading} {loading ? "Logging in..." : "Login"}{" "}
+          {loading} {loading ? "Logging in...⋆｡˚ ☁︎ ˚｡⋆｡˚☽˚｡⋆" : "Login"}{" "}
         </button>
 
        <br></br>
@@ -68,6 +78,7 @@ function LoginPage() {
             Create an Account {loading}
           </button>
         </Link>
+
       </form>
     </div>
    </div>

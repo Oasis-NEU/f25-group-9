@@ -74,6 +74,14 @@ function CreateAccountPage() {
                 </button>
 
                 {success && <p className="success">You created an account! Verify email to login</p>}
+
+                <br></br>
+
+                 <Link to="/login">
+                           <button className="buttonStyle">
+                             Back {loading}
+                           </button>
+                         </Link>
               </form>
             </div>
           </div>

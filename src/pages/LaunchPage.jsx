@@ -33,7 +33,6 @@ function LaunchPage() {
         <div class="about">
              <h2>About</h2>    
             <p>Description on dreamscape</p>
-            <img class = "background" src="public/aboutbackground.png"/>
         </div>
         </>
         
