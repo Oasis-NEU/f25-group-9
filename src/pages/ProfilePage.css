@@ -52,7 +52,6 @@ body {
   cursor: pointer;
 }
 
-/*makes post button fun*/
 .post-btn {
   background-color: #caa2be;
   border: none;
@@ -73,14 +72,13 @@ body {
 }
 
 .profile-pic {
-  width: 120px;
-  height: 120px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
   margin-bottom: 15px;
   object-fit: cover;
 }
 
-/* puts pfp and bio in container*/
 .profile-container {
   margin-top: 60px;
   padding: 40px;
@@ -99,7 +97,6 @@ body {
   font-style: italic;
 }
 
-/* for scroll through of dreams*/
 .dream-scroll {
   display: flex;
   flex-direction: column;
@@ -114,7 +111,7 @@ body {
   margin-bottom: 20px;
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
 }
-/*container*/
+
 .dream-list {
   display: flex;
   overflow-x: auto;
@@ -125,16 +122,22 @@ body {
 }
 
 .scroll-container {
-  position: relative;
   width: 90%;
-  height: 10%;
+  max-height: 800px;
   margin: 0 auto;
   padding: 20px 15px;
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(15px);
   border-radius: 30px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
   overflow-y: auto;
   box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+
+  scroll-behavior: smooth;
 }
 
 .dream-item {
@@ -145,7 +148,6 @@ body {
   background: rgba(255, 255, 255, 0.2);
   border-radius: 20px;
   padding: 20px;
-  margin: 20px 0;
 
   color: white;
   font-size: 1rem;
@@ -154,6 +156,8 @@ body {
   box-shadow: 0 8px 20px rgba(255, 255, 255, 0.25);
   transition: transform 0.25s ease;
   gap: 20px;
+
+  min-width: 0;
 }
 
 .dream-text {
@@ -162,11 +166,11 @@ body {
 }
 
 .dream-item-img {
-  width: 250px;
+  width: 300px;
   height: 350px;
   border-radius: 15px;
   object-fit: cover;
-  flex-shrink: 0; /* keeps the image from shrinking */
+  flex-shrink: 0;
 }
 
 .tag-container {

@@ -12,6 +12,7 @@ function ProfilePage() {
   const [fetchError, setFetchError] = useState(null);
   const [dreams, setDreams] = useState(null);
   const [displayName, setDisplayName] = useState(null);
+  const [pfp, setPfp] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -25,6 +26,7 @@ function ProfilePage() {
         if (userError) throw userError;
 
         setDisplayName(user.user_metadata.name);
+        setPfp(user.user_metadata.avatar_url);
 
         const { data, error: dreamsError } = await supabase
           .from("posts")
@@ -78,11 +80,7 @@ function ProfilePage() {
       </div>
 
       <div className="profile-container">
-        <img
-          src="/dreamscape__1_-removebg-preview.png"
-          alt="Profile Picture"
-          className="profile-pic"
-        />
+        {pfp && <img src={pfp} className="profile-pic" />}
         <h1>
           Welcome to your DreamScape, {displayName ? displayName : "Loading..."}
         </h1>
@@ -114,12 +112,9 @@ function ProfilePage() {
                     ))}
                   </div>
                 </div>
-
-                <img
-                  src={dream.image_url}
-                  alt="Dream"
-                  className="dream-item-img"
-                />
+                {dream.image_url && (
+                  <img src={dream.image_url} className="dream-item-img" />
+                )}
               </div>
             ))}
         </div>
