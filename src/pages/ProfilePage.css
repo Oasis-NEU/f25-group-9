@@ -13,9 +13,17 @@ body {
   color: #fff;
 }
 
+.h1 {
+  font-family: "DM Sans", system-ui, -apple-system, dm sans;
+}
+
+.p {
+  font-family: "DM Sans", system-ui, -apple-system, dm sans;
+}
+
 /*for top header POSSIBLY COULD MAKE UNIVERSAL*/
 .header {
-  background: #caa2be;
+  background-color: rgb(202, 162, 190, 0.3);
   backdrop-filter: blur(10px);
   padding: 15px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
@@ -24,9 +32,11 @@ body {
 
 .header nav button {
   margin: 0 10px;
-  background: transparent;
   border: none;
   font-size: 1.1rem;
+  padding: 8px 14px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .header nav a {
@@ -34,10 +44,12 @@ body {
   text-decoration: none;
   padding: 8px 14px;
   border-radius: 10px;
+  background: transparent;
 }
 
-.header nav a:hover {
+.header nav button:hover {
   background: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
 }
 
 /*makes post button fun*/
@@ -126,28 +138,57 @@ body {
 }
 
 .dream-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
   background: rgba(255, 255, 255, 0.2);
   border-radius: 20px;
-  padding: 15px;
-  margin: 10px 0;
+  padding: 20px;
+  margin: 20px 0;
 
   color: white;
   font-size: 1rem;
-  font-style: italic;
 
   backdrop-filter: blur(10px);
   box-shadow: 0 8px 20px rgba(255, 255, 255, 0.25);
-
   transition: transform 0.25s ease;
+  gap: 20px;
 }
 
-.dream-item:hover {
-  transform: translateY(-3px) scale(1.02);
-  background: rgba(255, 255, 255, 0.35);
+.dream-text {
+  flex: 1;
+  text-align: center;
 }
 
 .dream-item-img {
-  width: 300px;
-  height: 400px;
+  width: 250px;
+  height: 350px;
+  border-radius: 15px;
   object-fit: cover;
+  flex-shrink: 0; /* keeps the image from shrinking */
+}
+
+.tag-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+.tag-chip {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: 0.2s ease;
+  display: inline-block;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tag-chip:hover {
+  box-shadow: 0 0 20px white;
+  transform: scale(1.05);
 }
