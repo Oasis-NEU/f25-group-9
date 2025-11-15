@@ -3,12 +3,6 @@ import { useState, useEffect, use } from "react";
 import { supabase } from "../../supabase.js";
 
 function ProfilePage() {
-  const dreamsTests = [
-    "This is one of my dreams",
-    "This is another one of my dreams",
-    "Link this to the database",
-  ];
-
   const [fetchError, setFetchError] = useState(null);
   const [dreams, setDreams] = useState(null);
   const [displayName, setDisplayName] = useState(null);
@@ -93,8 +87,10 @@ function ProfilePage() {
           <a href="./Analysis">Analyze a Previous Dream</a>
         </button>
       </div>
+
       <div className="dream-scroll">
         <h3 className="dream-title"> Logged Dreams </h3>
+
         <div className="scroll-container">
           {fetchError && <p>{fetchError}</p>}
           {dreams &&
