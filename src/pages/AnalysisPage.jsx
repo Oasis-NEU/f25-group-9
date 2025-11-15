@@ -122,7 +122,10 @@ function AnalysisPage() {
                     style={{             
                         fontFamily: "DM Sans",             
                         fontSize: "30px",             
-                        color: "#d4a6b0",           
+                        color: "#d4a6b0",
+                        marginTop: "-25px",
+                        marginBottom: "55px",  
+                             
                     }}         
                 >           
                     Let's decode your subconscious 🌙         
