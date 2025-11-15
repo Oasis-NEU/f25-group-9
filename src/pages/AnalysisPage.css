@@ -12,7 +12,7 @@
 }
 
 .cloud {
-  background: linear-gradient(135deg, #bce6ff, #e0baff);
+  background: linear-gradient(135deg, #6aa1c1, #e0baff);
   border-radius: 60px;
   padding: 25px 45px;
   font-family: "DM Sans", sans-serif;
@@ -33,3 +33,28 @@
   transform: scale(1.1);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
+
+/* Analysis Page Back Button */
+.back-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+
+    color: var(--text, #fff);
+    background: color-mix(in srgb, var(--card, #b9a2d0) 50%, transparent);
+
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+
+    box-shadow: 0 8px 30px rgba(14, 15, 26, 0.25);
+    padding: 10px 20px;
+
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.back-button:hover {
+    filter: brightness(1.05);
+}
+
