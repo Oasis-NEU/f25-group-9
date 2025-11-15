@@ -54,10 +54,8 @@ h1 {
     backdrop-filter: blur(10px);
     color: #f3f3f3;
     padding: 12px 32px;
-    border-radius: 10px;
     font-size: 16px;
     font-weight: 700;
-    font-family: "DM Sans", system-ui, -apple-system, dm sans;
     letter-spacing: 0.2px;
     cursor: pointer;
     transition: 0.2s;

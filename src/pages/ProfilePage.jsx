@@ -50,7 +50,7 @@ function ProfilePage() {
   if (loading) {
     return (
       <div className="loading-screen">
-        <h1>Loading your DreamScape...</h1>
+        <h1>Loading your DreamScape<span className="dots"></span></h1>
       </div>
     );
   }
