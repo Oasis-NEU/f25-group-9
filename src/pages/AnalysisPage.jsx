@@ -1,11 +1,18 @@
-import { useState,useEffect, useRef} from "react"; import { supabase } from "../../supabase.js"; import { useNavigate } from "react-router-dom"; import "./AnalysisPage.css";  
+import { useState,useEffect, useRef} from "react"; 
+import { supabase } from "../../supabase.js";
+import { useNavigate } from "react-router-dom"; 
+import "./AnalysisPage.css";  
+
+const formatAnalysis = (text) => {
+  if (!text) return "";
+  return text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+};
 
 function AnalysisPage() {         
     const [dreams, setDreams] = useState([]);         
     const [selectedDream, setSelectedDream] = useState(null);         
     const [analysisText, setAnalysisText] = useState("");         
-    const [isAnalyzing, setIsAnalyzing] = useState(false);         
-
+    const [isAnalyzing, setIsAnalyzing] = useState(false); 
     const analysisRef = useRef(null);         
 
     const pageStyle = {             
@@ -20,10 +27,20 @@ function AnalysisPage() {
     const navigate = useNavigate();       
 
     useEffect(() => {         
-        const fetchDreams = async () => {         
+        const fetchDreams = async () => {    
+            
+        const { data: userData } = await supabase.auth.getUser();
+        const user = userData?.user;
+
+        if (!user) {
+            console.error("No logged-in user found");
+            return;
+        }
+
         const { data, error } = await supabase             
             .from("posts")              
-            .select("*")             
+            .select("*")  
+            .eq("user_id", user.id)           
             .order("id", { ascending: false });         
 
         if (error) {             
@@ -91,25 +108,12 @@ function AnalysisPage() {
         <>       
             <div style={pageStyle}>        
 
-                <button           
-                    onClick={() => navigate("/profile")}           
-                    style={{             
-                        background: "rgba(255,255,255,0.3)",             
-                        border: "none",             
-                        padding: "12px 25px",             
-                        borderRadius: "20px",             
-                        fontSize: "18px",             
-                        cursor: "pointer",             
-                        color: "#fff",             
-                        marginBottom: "20px",             
-                        backdropFilter: "blur(6px)",           
-                    }}         
-                >           
-                    ⬅ Back to Profile        
-                </button>         
+                <button className="back-button" onClick={() => navigate("/profile")}>
+                    Back to Profile
+                </button>
 
                 <h1           
-                    style={{ fontFamily: "DM Sans", fontSize: "100px", color: "#caa2be" }}         
+                    style={{ fontFamily: "DM Sans", fontSize: "100px", color: "#d49dc3ff" }}         
                 >           
                     Dream Analyzer         
                 </h1>         
@@ -118,7 +122,10 @@ function AnalysisPage() {
                     style={{             
                         fontFamily: "DM Sans",             
                         fontSize: "30px",             
-                        color: "#d4a6b0",           
+                        color: "#d4a6b0",
+                        marginTop: "-25px",
+                        marginBottom: "55px",  
+                             
                     }}         
                 >           
                     Let's decode your subconscious 🌙         
@@ -136,7 +143,7 @@ function AnalysisPage() {
                             </div>             
                         ))           
                     ) : (             
-                        <p style={{ color: "#fff" }}>No dreams found.</p>           
+                        <p style={{ color: "#fff", fontSize: "18px" }}>The stars are waiting for your stories ⭐</p>           
                     )}         
                 </div>         
 
@@ -167,16 +174,38 @@ function AnalysisPage() {
                             boxShadow: "0 8px 25px rgba(0,0,0,0.35)"             
                         }}           
                     >             
-                        <h2 style={{               
-                            fontSize: "32px",               
-                            marginBottom: "20px",               
-                            fontWeight: "bold",               
-                            color: "#f7d7e2"             
-                        }}>               
-                            Dream Analysis             
-                        </h2>             
+                    <h2 
+                        style={{
+                            fontSize: "38px",
+                            marginBottom: "10px",
+                            fontWeight: "700",
+                            color: "#f7d7e2",
+                            letterSpacing: "1px"
+                        }}
+                        >
+                        Dream Analysis
+                        </h2>
 
-                        <p style={{ whiteSpace: "pre-line" }}>{analysisText}</p>           
+                        <p
+                        style={{
+                            marginTop: "0",
+                            marginBottom: "25px",
+                            fontSize: "20px",
+                            color: "#fce9f1",
+                            opacity: 1,
+                            fontStyle: "italic",
+                            textDecoration: "underline",   
+                            textUnderlineOffset: "4px",
+                        }}
+                        >
+                        {selectedDream?.title}
+                        </p>
+             
+
+                        <p
+                            style={{ whiteSpace: "pre-line" }}
+                            dangerouslySetInnerHTML={{ __html: formatAnalysis(analysisText) }}
+                            />
                     </div>         
                 )}        
 
