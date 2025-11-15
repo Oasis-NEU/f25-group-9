@@ -190,6 +190,7 @@ body{
     color: var(--text);
     top: 20px;
     left: 20px;
+    border: none;
     background: color-mix(in srgb, var(--card) 50%, transparent);
     backdrop-filter: blur(15px);
     border-radius: var(--radius);

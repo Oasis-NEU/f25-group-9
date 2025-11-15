@@ -1,45 +1,106 @@
-button {
-  padding: 10px, 20px;
-  background-color: #a09fcd;
-  border: none;
-  border-radius: 5px;
-  margin: 2px;
-  .container img {
-    width: 100%;
-    height: auto;
-  }
-  .container .btn:hover {
-    background-color: #a09fcd;
-  }
+.launch-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
 }
 
-.hometab {
-  width: 990px;
-  height: 30px;
-  box-sizing: border-box;
-  background: var(--muted);
-  border-radius: var(--radius);
-  margin-top: 10px;
-  margin-left: 260px;
-  text-align: left;
-  padding-top: 2px;
-  padding-left: 20px;
+.launch-content {
+    max-width: 700px;
+    text-align: left;
+    border-radius: var(--radius);
+    padding: 60px 40px;
+    position: relative;
+    z-index: 1;
 }
 
-.quote {
-  text-align: center;
+.floating-section {
+    animation: float 6s cubic-bezier(0.4, 0.0, 0.6, 1.0) infinite;
+    position: relative;
 }
 
-.about {
-  text-align: center;
+h1 {
+  font-style: italic;
 }
 
-.background {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.made-by {
+    margin-top: 60px;
+    padding-top: 40px;
+    border-top: 1px solid color-mix(in srgb, var(--line) 40%, transparent);
 }
 
-.dslabel {
-  margin: 300px;
+.launch-title {
+    font-size: 64px;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+    margin-bottom: 24px;
+    color: var(--text);
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.launch-description {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 50px;
+    color: var(--text);
+    opacity: 0.9;
+}
+
+.launch-button {
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.4);
+    backdrop-filter: blur(10px);
+    color: #f3f3f3;
+    padding: 12px 32px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: "DM Sans", system-ui, -apple-system, dm sans;
+    letter-spacing: 0.2px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.launch-button:hover {
+    transform: scale(1.0);
+    box-shadow: 0 0 10px white;
+}
+
+.launch-button:hover {
+    filter: brightness(1.05);
+}
+
+.launch-button:active {
+    transform: translateY(1px);
+}
+
+.made-by {
+    margin-top: 60px;
+    padding-top: 40px;
+    border-top: 1px solid color-mix(in srgb, var(--line) 40%, transparent);
+    text-align: center;
+}
+
+.made-by > p {
+    font-size: 14px;
+    color: var(--text);
+    opacity: 0.6;
+    margin-bottom: 16px;
+    font-weight: 600;
+}
+
+.creators {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.creators span {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    opacity: 0.8;
 }
