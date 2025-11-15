@@ -143,7 +143,7 @@ function AnalysisPage() {
                             </div>             
                         ))           
                     ) : (             
-                        <p style={{ color: "#fff" }}>No dreams found.</p>           
+                        <p style={{ color: "#fff", fontSize: "18px" }}>The stars are waiting for your stories ⭐</p>           
                     )}         
                 </div>         
 
