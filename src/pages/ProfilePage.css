@@ -13,38 +13,60 @@ body {
   color: #fff;
 }
 
-/*for top header POSSIBLY COULD MAKE UNIVERSAL*/
-.header {
-  background: #caa2be;
-  backdrop-filter: blur(10px);
-  padding: 15px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+.h1 {
   font-family: "DM Sans", system-ui, -apple-system, dm sans;
 }
 
+.p {
+  font-family: "DM Sans", system-ui, -apple-system, dm sans;
+}
+
+/*for top header POSSIBLY COULD MAKE UNIVERSAL*/
+.header {
+  background: color-mix(in srgb, var(--card) 50%, transparent);
+  backdrop-filter: blur(10px);
+  padding: 15px 0;
+  box-shadow: 0 8px 30px rgba(14, 15, 26, 0.25);
+  font-family: "DM Sans", system-ui, -apple-system, dm sans;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
 .header nav button {
-  margin: 0 10px;
-  background: transparent;
-  border: none;
-  font-size: 1.1rem;
+    background: rgba(255,255,255,0.2);
+    border: none;
+    backdrop-filter: blur(10px);
+    color: #f3f3f3;
+    padding: 5px 15px;
+    margin-left: 1%;
+    margin-right: 1%;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.header nav button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px white;
 }
 
 .header nav a {
   color: white;
   text-decoration: none;
   padding: 8px 14px;
-  border-radius: 10px;
+  background: transparent;
 }
 
-.header nav a:hover {
+.header nav button:hover {
   background: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
 }
 
-/*makes post button fun*/
 .post-btn {
   background-color: #caa2be;
   border: none;
-  border-radius: 25px;
   padding: 12px 28px;
   font-size: 1rem;
   font-weight: 600;
@@ -61,19 +83,17 @@ body {
 }
 
 .profile-pic {
-  width: 120px;
-  height: 120px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
   margin-bottom: 15px;
   object-fit: cover;
 }
 
-/* puts pfp and bio in container*/
 .profile-container {
   margin-top: 60px;
   padding: 40px;
   background: rgba(255, 255, 255, 0.15);
-  border-radius: 25px;
   backdrop-filter: blur(15px);
   display: inline-block;
   box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
@@ -87,7 +107,6 @@ body {
   font-style: italic;
 }
 
-/* for scroll through of dreams*/
 .dream-scroll {
   display: flex;
   flex-direction: column;
@@ -102,7 +121,7 @@ body {
   margin-bottom: 20px;
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
 }
-/*container*/
+
 .dream-list {
   display: flex;
   overflow-x: auto;
@@ -113,41 +132,91 @@ body {
 }
 
 .scroll-container {
-  position: relative;
   width: 90%;
-  height: 10%;
+  max-height: 800px;
   margin: 0 auto;
   padding: 20px 15px;
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(15px);
-  border-radius: 30px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
   overflow-y: auto;
   box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+
+  scroll-behavior: smooth;
 }
 
 .dream-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
   background: rgba(255, 255, 255, 0.2);
-  border-radius: 20px;
-  padding: 15px;
-  margin: 10px 0;
+  padding: 20px;
 
   color: white;
   font-size: 1rem;
-  font-style: italic;
 
   backdrop-filter: blur(10px);
   box-shadow: 0 8px 20px rgba(255, 255, 255, 0.25);
-
   transition: transform 0.25s ease;
+  gap: 20px;
+
+  min-width: 0;
 }
 
-.dream-item:hover {
-  transform: translateY(-3px) scale(1.02);
-  background: rgba(255, 255, 255, 0.35);
+.dream-text {
+  flex: 1;
+  text-align: center;
 }
 
 .dream-item-img {
   width: 300px;
-  height: 400px;
+  height: 350px;
   object-fit: cover;
+  flex-shrink: 0;
+}
+
+.tag-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+.tag-chip {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: 0.2s ease;
+  display: inline-block;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tag-chip:hover {
+  box-shadow: 0 0 20px white;
+  transform: scale(1.05);
+}
+
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.loading-screen h1 {
+    font-size: 48px;
+    font-weight: 800;
+    color: var(--text);
 }

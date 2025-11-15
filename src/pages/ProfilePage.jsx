@@ -3,70 +3,57 @@ import { useState, useEffect, use } from "react";
 import { supabase } from "../../supabase.js";
 
 function ProfilePage() {
-  const dreamsTests = [
-    "This is one of my dreams",
-    "This is another one of my dreams",
-    "Link this to the database",
-  ];
-
   const [fetchError, setFetchError] = useState(null);
   const [dreams, setDreams] = useState(null);
   const [displayName, setDisplayName] = useState(null);
+  const [pfp, setPfp] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const loadUserName = async () => {
-      const {
-        data: { user },
-        error,
-      } = await supabase.auth.getUser();
+    const loadData = async () => {
+      try {
+        const {
+          data: { user },
+          error: userError,
+        } = await supabase.auth.getUser();
 
-      if (user) {
-        setDisplayName(user.user_metadata.email);
-      }
+        if (userError) throw userError;
 
-      if (error) {
-        console.log(error);
-        setFetchError("Could not load user");
-      }
-    };
+        setDisplayName(user.user_metadata.name);
+        setPfp(user.user_metadata.avatar_url);
 
-    loadUserName();
-  }, []);
+        const { data, error: dreamsError } = await supabase
+          .from("posts")
+          .select("*")
+          .eq("user_id", user.id);
 
-  useEffect(() => {
-    const fetchDreams = async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
+        if (dreamsError) throw dreamsError;
 
-      if (!user) return;
-
-      const { data, error } = await supabase
-        .from("posts")
-        .select("*")
-        .eq("user_id", user.id);
-
-      if (error) {
-        console.log(error);
-        setFetchError("Could not load dreams");
-      } else {
-        setFetchError(null);
         setDreams(data.reverse());
+        setFetchError(null);
+      } catch (err) {
+        console.log(err);
+        setFetchError("Could not load page data");
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchDreams();
+    loadData();
   }, []);
 
   const handleLogout = async () => {
     const { error } = await supabase.auth.signOut();
-    if (error) {
-      console.log("Error signing out:", error.message);
-    } else {
-      // Redirect the user after logout, e.g., to login page
-      window.location.href = "/launch"; // or wherever your login page is
-    }
+    if (!error) window.location.href = "/launch";
   };
+
+  if (loading) {
+    return (
+      <div className="loading-screen">
+        <h1>Loading your DreamScape<span className="dots"></span></h1>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -78,7 +65,7 @@ function ProfilePage() {
           </button>
           <button>
             {" "}
-            <a href="./home"> DreamScape</a>
+            <a href="./launch"> DreamScape</a>
           </button>
           <button onClick={handleLogout}>
             <a>Logout</a>
@@ -87,15 +74,11 @@ function ProfilePage() {
       </div>
 
       <div className="profile-container">
-        <img
-          src="/dreamscape__1_-removebg-preview.png"
-          alt="Profile Picture"
-          className="profile-pic"
-        />
+        {pfp && <img src={pfp} className="profile-pic" />}
         <h1>
           Welcome to your DreamScape, {displayName ? displayName : "Loading..."}
         </h1>
-        <p className="bio">Below here lies your subconscious</p>
+        <p className="bio">Below lies your subconscious</p>
         <button className="post-btn">
           <a href="./Post">Make a Post</a>
         </button>
@@ -104,20 +87,30 @@ function ProfilePage() {
           <a href="./Analysis">Analyze a Previous Dream</a>
         </button>
       </div>
+
       <div className="dream-scroll">
         <h3 className="dream-title"> Logged Dreams </h3>
+
         <div className="scroll-container">
           {fetchError && <p>{fetchError}</p>}
           {dreams &&
             dreams.map((dream) => (
               <div className="dream-item" key={dream.id}>
-                {dream.title}
-                <p className="dream-body">{dream.body}</p>
-                <img
-                  src={dream.image_url}
-                  alt="Dream"
-                  className="dream-item-img"
-                />
+                <div className="dream-text">
+                  <h3>{dream.title}</h3>
+                  <p className="dream-body">{dream.body}</p>
+
+                  <div className="tag-container">
+                    {JSON.parse(dream.tags).map((tag) => (
+                      <span key={tag} className="tag-chip">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                {dream.image_url && (
+                  <img src={dream.image_url} className="dream-item-img" />
+                )}
               </div>
             ))}
         </div>
