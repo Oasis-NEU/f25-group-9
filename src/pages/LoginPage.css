@@ -94,5 +94,20 @@ width: 100px;
 }
 
 .inputbox {
+  padding: 6px 10px;          
+  border: 2px solid #ffffff80;
+  border-radius: 12px;       
+  background: rgba(255, 255, 255, 0.15); 
+  color: #f3f3f3;            
+  font-family: "DM Sans", system-ui, -apple-system;
+  outline: none;              
+  width: 100%;               
+  box-sizing: border-box;    
+  transition: 0.2s;  
   margin: center;
+}
+
+.inputbox:focus {
+  border-color: #ffffff;     
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
 }

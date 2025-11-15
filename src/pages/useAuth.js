@@ -19,13 +19,45 @@ export function useAuth() {
     return () => subscription.unsubscribe();
   }, []);
 
-  const signUp = async (email, password) => {
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-    });
-    return { data, error };
-  };
+ const signUp = async (name, email, password, imageFile) => {
+  let avatar_url = null;
+
+  if (imageFile) {
+    const fileExt = imageFile.name.split('.').pop();          
+    const fileName = `${Date.now()}.${fileExt}`;             
+    const filePath = `${fileName}`;
+
+    const { error: uploadError } = await supabase.storage
+      .from('pfps')                                     
+      .upload(filePath, imageFile);
+
+    if (uploadError) {
+      return { data: null, error: uploadError };          
+    }
+
+   
+    const { data: urlData } = supabase.storage
+      .from('pfps')
+      .getPublicUrl(filePath);
+
+    avatar_url = urlData.publicUrl;
+  }
+
+
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      data: {
+        name,
+        avatar_url,  
+      },
+      emailRedirectTo: `${window.location.origin}/login`,
+    },
+  });
+
+  return { data, error };
+};
 
   const signIn = async (email, password) => {
     const { data, error } = await supabase.auth.signInWithPassword({
