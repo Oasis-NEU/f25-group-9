@@ -1,4 +1,4 @@
-.createaccount-container{
+.createaccount-container {
   margin-bottom: 80px;
   padding: 30px 60px;
   background: rgba(255, 255, 255, 0.15);
@@ -8,14 +8,14 @@
   box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
   animation: float 6s ease-in-out infinite;
 
-  display: flex;           
-  flex-direction: column;  
-  align-items: center; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .file-input-wrapper {
   display: flex;
-  justify-content: center; 
+  justify-content: center;
   width: 100%;
 }
 
@@ -24,19 +24,18 @@
   font-weight: bold;
   display: block;
   margin-bottom: 6px;
-  
 }
 
 .profile-input {
-   display: none;
+  display: none;
 }
 
 .file-button {
   margin-top: 4px;
   padding: 4px 10px;
   border-radius: 10px;
-  background: rgba(255,255,255,0.2);
-  border: 1px solid rgba(255,255,255,0.4);
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.4);
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
@@ -49,14 +48,14 @@
 .file-button:hover {
   transform: scale(1.05);
   box-shadow: 0 0 10px white;
-  
-.profileupload{
-  display: flex;
-  flex-direction: column; 
-  align-items: center;   
-  width: 250px;          
-  margin-bottom: 10px;
-}
+
+  .profileupload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 250px;
+    margin-bottom: 10px;
+  }
 }
 
 .profile-preview {
@@ -68,50 +67,50 @@
   border: 2px solid #ddd;
 }
 
-.emailinput, .passwordinput, .nameinput{
+.emailinput,
+.passwordinput,
+.nameinput {
   display: flex;
-  align-items: center; 
-  gap: 10px;            
+  align-items: center;
+  gap: 10px;
   margin-bottom: 5px;
   width: 250px;
 }
 
-.createaccount-label{
-  width: 200px;        
-  text-align: left;    
+.createaccount-label {
+  width: 200px;
+  text-align: left;
   font-family: "DM Sans", system-ui, -apple-system;
   font-weight: 900;
   color: #f3f3f3;
   font-size: 30px;
-
 }
 
-.email-label, .password-label, .name-label{
-width: 100px;        
-  text-align: left;    
+.email-label,
+.password-label,
+.name-label {
+  width: 100px;
+  text-align: left;
   font-family: "DM Sans", system-ui, -apple-system;
   font-weight: 600;
   color: #f3f3f3;
   font-size: 18px;
-  text-align: left
+  text-align: left;
 }
 
-.emailinput input{
+.emailinput input {
   flex: 1;
   padding: 5px 6px;
-
 }
 
-.passwordinput input{
+.passwordinput input {
   flex: 1;
   padding: 5px 6px;
-
 }
 
-.nameinput input{
+.nameinput input {
   flex: 1;
   padding: 5px 6px;
-
 }
 
 .submit {
@@ -125,8 +124,8 @@ width: 100px;
   margin-top: 4px;
   padding: 4px 10px;
   border-radius: 10px;
-  background: rgba(255,255,255,0.2);
-  border: 1px solid rgba(255,255,255,0.4);
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.4);
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
@@ -142,7 +141,7 @@ width: 100px;
   color: white;
 }
 .buttonStyle:hover {
-  transform: scale(1.0);
+  transform: scale(1);
   box-shadow: 0 0 10px white;
 }
 
@@ -151,19 +150,18 @@ width: 100px;
 }
 
 .inputbox:focus {
-  border-color: #ffffff;     
+  border-color: #ffffff;
   box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
 }
 
-.background{
+.background {
   width: 100vw;
   height: 100vh;
-  background-image: url('../public/LoginBackground.jpg');
+  background-image: url("/LoginBackground.jpg");
   background-size: cover;
-  background-position:center;
-  background-repeat:no-repeat;
-  display:flex;  
-  justify-content:center;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
-
